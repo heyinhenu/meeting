@@ -1,6 +1,7 @@
 package org.meeting.sort;
 
 /**
+ * http://blog.csdn.net/yzllz001/article/details/50982841
  * 分类 ------------ 内部比较排序
  * 数据结构 --------- 数组
  * 最差时间复杂度 ---- 每次选取的基准都是最大（或最小）的元素，导致每次只划分出了一个分区，需要进行n-1次划分才能结束递归，时间复杂度为O(n^2)
@@ -15,34 +16,43 @@ package org.meeting.sort;
  */
 public class QuickSort implements Sort {
 
-    public void swap(int a[], int i1, int i2) {
-        int temp = a[i1];
-        a[i1] = a[i2];
-        a[i2] = temp;
-    }
-
-    public int partition(int[] a, int left, int right) {
-        int tail = left - 1;
-
-        int pivot = right;
-
-        for (int i = left; i < right; i++) {
-            if (a[i] < a[pivot]) {
-                swap(a, ++tail, a[i]);
-            }
-        }
-        swap(a, tail + 1, right);
-
-        return tail + 1;
-    }
-
     public void quickSort(int[] a, int left, int right) {
-        if (left >= right){
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i] + "   ");
+        }
+        System.out.println();
+
+        int i, j, t, pivot;
+        if (left > right) {
             return;
         }
-        int pivot = partition(a, left, right);
-        quickSort(a, left, pivot - 1);
-        quickSort(a, pivot + 1, right);
+        //temp中存的就是基准数
+        pivot = a[left];
+        i = left;
+        j = right;
+        while (i != j) {
+            //顺序很重要，要先从右边开始找
+            while (a[j] >= pivot && i < j) {
+                j--;
+            }
+            //再找右边的
+            while (a[i] <= pivot && i < j) {
+                i++;
+            }
+            //交换两个数在数组中的位置
+            if (i < j) {
+                t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        //最终将基准数归位
+        a[left] = a[i];
+        a[i] = pivot;
+        //继续处理左边的，这里是一个递归的过程
+        quickSort(a, left, i - 1);
+        //继续处理右边的 ，这里是一个递归的过程
+        quickSort(a, i + 1, right);
     }
 
     @Override
@@ -50,15 +60,10 @@ public class QuickSort implements Sort {
         quickSort(a, 0, a.length - 1);
     }
 
-
     public static void main(String args[]) {
         Sort sort = SortFactory.newInstance(QuickSort.class);
         int size = 10;
-        int[] a = new int[size];
-        for (int i = 0; i < size; i++) {
-            a[i] = size - 1 - i;
-
-        }
+        int[] a = {6, 1, 2, 7, 9, 3, 4, 5, 10, 8};
         sort.sort(a);
     }
 }
