@@ -8,20 +8,20 @@ package org.meeting.sort;
  * @Date: 2017/11/30 16:56
  * @Since JDK 1.8
  */
-public class SelectionSort implements Sort{
+public class SelectionSort implements Sort {
     @Override
     public void sort(int[] a) {
         int size = a.length;
 
-        for (int i = 0 ; i < size-1 ; i++ ){
+        for (int i = 0; i < size - 1; i++) {
             int min = i;
-            for (int j = i+1 ; j < size ; j++){
-                if(a[j] < a[min]){
+            for (int j = i + 1; j < size; j++) {
+                if (a[j] < a[min]) {
                     min = j;
                 }
             }
 
-            swap(a,min,i);
+            swap(a, min, i);
         }
     }
 
@@ -32,13 +32,13 @@ public class SelectionSort implements Sort{
     }
 
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
         Sort sort = SortFactory.newInstance(SelectionSort.class);
 
-        int size =1000;
+        int size = 1000;
         int[] a = new int[size];
-        for (int i = 0; i<size; i++){
-            a[i] = size-1-i;
+        for (int i = 0; i < size; i++) {
+            a[i] = size - 1 - i;
 
         }
 

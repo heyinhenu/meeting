@@ -13,7 +13,7 @@ package org.meeting.sort;
  */
 public abstract class MergeSort implements Sort {
 
-    protected void merge(int a[], int left, int mid, int right){
+    protected void merge(int a[], int left, int mid, int right) {
         int len = right - left + 1;
         int[] temp = new int[len];
         int index = 0;
@@ -22,19 +22,19 @@ public abstract class MergeSort implements Sort {
 
         int j = mid + 1;
 
-        while (i <= mid && j <= right){
+        while (i <= mid && j <= right) {
             temp[index++] = a[i] <= a[j] ? a[i++] : a[j++];
         }
 
-        while (i <= mid){
+        while (i <= mid) {
             temp[index++] = a[i++];
         }
 
-        while (j <= right){
+        while (j <= right) {
             temp[index++] = a[j++];
         }
 
-        for (int k = 0; k < temp.length; k++){
+        for (int k = 0; k < temp.length; k++) {
             a[left++] = temp[k];
         }
     }
