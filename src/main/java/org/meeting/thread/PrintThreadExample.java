@@ -6,7 +6,6 @@ import java.util.concurrent.Executors;
 public class PrintThreadExample {
 
     public static void main(String[] args) {
-        PrintThreadExample example = new PrintThreadExample();
         LetterPrinter letterPrinter = new LetterPrinter();
         ExecutorService service = Executors.newFixedThreadPool(3);
         service.execute(new PrintRunnable(letterPrinter, 'A'));
