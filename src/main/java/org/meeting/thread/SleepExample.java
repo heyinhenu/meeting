@@ -3,7 +3,7 @@ package org.meeting.thread;
 
 /**
  * 题目：有三个线程分别打印A、B、C,请用多线程编程实现，在屏幕上循环打印10次ABCABC…
- *
+ * <p>
  * 当然还有其他好多种实现，例如：Lock、condition、Semaphore、等
  */
 public class SleepExample extends Thread {
@@ -38,18 +38,10 @@ public class SleepExample extends Thread {
     }
 
     private void printAndIncrease() {
-        print();
-        increase();
-    }
-
-    private void print() {
         System.out.println(getName());
         if ("C".equals(getName())) {
             System.out.println();
         }
-    }
-
-    private void increase() {
         currentCount++;
     }
 
