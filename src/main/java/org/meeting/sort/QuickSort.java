@@ -21,37 +21,29 @@ public class QuickSort implements Sort {
             System.out.print(a[i] + "   ");
         }
         System.out.println();
-
         int i, j, t, pivot;
         if (left > right) {
             return;
         }
-        //temp中存的就是基准数
         pivot = a[left];
         i = left;
         j = right;
         while (i != j) {
-            //顺序很重要，要先从右边开始找
             while (a[j] >= pivot && i < j) {
                 j--;
             }
-            //再找右边的
             while (a[i] <= pivot && i < j) {
                 i++;
             }
-            //交换两个数在数组中的位置
             if (i < j) {
                 t = a[i];
                 a[i] = a[j];
                 a[j] = t;
             }
         }
-        //最终将基准数归位
         a[left] = a[i];
         a[i] = pivot;
-        //继续处理左边的，这里是一个递归的过程
         quickSort(a, left, i - 1);
-        //继续处理右边的 ，这里是一个递归的过程
         quickSort(a, i + 1, right);
     }
 
